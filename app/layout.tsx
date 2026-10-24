@@ -3,9 +3,12 @@ import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
+import { RevealObserver } from "@/components/RevealObserver";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { CONTACT_EMAIL, site } from "@/content/site";
 import "./globals.css";
+
+const CF_BEACON_TOKEN = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN;
 
 // next/font downloads these at build time and serves them from our own origin.
 const serif = Instrument_Serif({
@@ -33,9 +36,8 @@ export const metadata: Metadata = {
     locale: "en_US",
   },
   twitter: { card: "summary_large_image", title: site.title, description: site.description },
-  icons: {
-    icon: [{ url: "/brand/favicon.svg", type: "image/svg+xml" }],
-  },
+  // Icons and social images come from app/icon.svg, app/apple-icon.tsx,
+  // app/opengraph-image.tsx and app/twitter-image.tsx.
 };
 
 export const viewport: Viewport = {
@@ -61,7 +63,15 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Marks JS as available before first paint, so reveal styles never hide content without it. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body>
         <a
           href="#main"
@@ -70,6 +80,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           Skip to content
         </a>
         <SmoothScroll />
+        <RevealObserver />
         <Nav />
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
@@ -79,6 +90,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        {/* Cloudflare Web Analytics: cookie-free, so no consent banner. Set the token at build time. */}
+        {CF_BEACON_TOKEN && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: CF_BEACON_TOKEN })}
+          />
+        )}
       </body>
     </html>
   );

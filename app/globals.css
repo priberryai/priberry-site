@@ -124,6 +124,63 @@
   }
 }
 
+/* ---------- Section reveals (driven by components/RevealObserver.tsx) ---------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--duration-reveal) var(--ease-brand),
+    transform var(--duration-reveal) var(--ease-brand);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.js [data-reveal][data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- How it works: scroll-linked rail (components/sections/StepsProgress.tsx) ---------- */
+.steps-fill {
+  transform: scaleY(var(--progress, 1));
+  will-change: transform;
+}
+.step-dot {
+  color: var(--color-ink);
+  transition: color 400ms var(--ease-brand);
+}
+.step-dot-fill {
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 400ms var(--ease-brand),
+    transform 500ms var(--ease-brand);
+}
+.step[data-lit] .step-dot {
+  color: #fff;
+}
+.step[data-lit] .step-dot-fill {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Without JS the rail is full and every step is lit. */
+html:not(.js) .step-dot {
+  color: #fff;
+}
+html:not(.js) .step-dot-fill {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- FAQ: answers fade in (opacity and transform only) ---------- */
+.faq[open] > p {
+  animation: faq-in 420ms var(--ease-brand);
+}
+@keyframes faq-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
 /* ---------- Lenis smooth scroll ---------- */
 html.lenis,
 html.lenis body {
