@@ -216,7 +216,7 @@ export function GradingPanel() {
                           ? "bg-berry-deep text-white"
                           : "bg-[#FBEFF4] text-berry-deep"
                         : status === "miss"
-                          ? "bg-lilac text-purple opacity-40"
+                          ? "bg-transparent text-muted line-through ring-1 ring-inset ring-line-strong"
                           : "bg-lilac text-purple"
                     }`}
                   >

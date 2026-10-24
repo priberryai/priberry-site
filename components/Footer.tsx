@@ -6,15 +6,15 @@ export function Footer() {
   return (
     <footer className="on-ink bg-ink text-on-ink-muted">
       <div className="container-page pb-10 pt-20 md:pt-28">
-        <div className="grid gap-14 md:grid-cols-12">
-          <div className="md:col-span-5">
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-5">
             <a href="/" aria-label="Priberry home" className="inline-block rounded-lg text-on-ink">
               <Logo className="h-8 w-auto" />
             </a>
             <p className="mt-6 max-w-sm text-[0.9375rem] leading-relaxed">{footer.blurb}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:col-span-7">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7">
             {footer.groups.map((g) => (
               <nav key={g.title} aria-label={g.title}>
                 <h2 className="label-mono text-on-ink-muted">{g.title}</h2>

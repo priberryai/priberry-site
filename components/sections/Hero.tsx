@@ -56,7 +56,7 @@ export function Hero() {
           {/* Soft berry glow behind the panel */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -inset-x-10 -top-16 bottom-10 -z-10 rounded-[48px] opacity-70 blur-3xl"
+            className="pointer-events-none absolute -inset-x-10 -top-16 bottom-10 -z-10 rounded-[48px] opacity-70"
             style={{
               background:
                 "radial-gradient(60% 55% at 70% 40%, rgb(242 154 185 / 0.35), transparent 70%), radial-gradient(50% 60% at 20% 70%, rgb(90 45 130 / 0.14), transparent 70%)",
@@ -69,7 +69,8 @@ export function Hero() {
   );
 }
 
-// Static hexagonal dot field echoing the seven-circle mark. Fades out at the edges.
+// Static hexagonal dot field echoing the seven-circle mark. The fade is a paper
+// gradient layered on top in the same element (cheaper to paint than mask-image).
 function HexDots() {
   return (
     <div
@@ -77,11 +78,11 @@ function HexDots() {
       className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[900px]"
       style={{
         backgroundImage:
-          "radial-gradient(circle, rgb(30 21 48 / 0.10) 1.1px, transparent 1.6px), radial-gradient(circle, rgb(30 21 48 / 0.10) 1.1px, transparent 1.6px)",
-        backgroundSize: "28px 48.5px",
-        backgroundPosition: "0 0, 14px 24.25px",
-        maskImage: "radial-gradient(70% 60% at 75% 20%, #000 10%, transparent 75%)",
-        WebkitMaskImage: "radial-gradient(70% 60% at 75% 20%, #000 10%, transparent 75%)",
+          "radial-gradient(70% 60% at 75% 20%, transparent 10%, var(--color-paper) 75%), " +
+          "radial-gradient(circle, rgb(30 21 48 / 0.10) 1.1px, transparent 1.6px), " +
+          "radial-gradient(circle, rgb(30 21 48 / 0.10) 1.1px, transparent 1.6px)",
+        backgroundSize: "100% 100%, 28px 48.5px, 28px 48.5px",
+        backgroundPosition: "0 0, 0 0, 14px 24.25px",
       }}
     />
   );

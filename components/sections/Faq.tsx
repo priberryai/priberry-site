@@ -21,7 +21,7 @@ export function Faq() {
           </h2>
           <p data-reveal style={{ "--i": 2 } as React.CSSProperties} className="mt-6 text-body">
             Something else?{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="link-underline font-medium text-ink">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="link-inline font-medium text-ink">
               {CONTACT_EMAIL}
             </a>
           </p>

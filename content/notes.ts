@@ -80,9 +80,7 @@ export function readingMinutes(note: Note): number {
 }
 
 /** Title for display: keeps hyphenated words like "expert-graded" on one line. */
-export function displayTitle(title: string): string {
-  return title.replace(/(\w)-(\w)/g, "$1‑$2");
-}
+export { keepHyphenated as displayTitle } from "@/lib/text";
 
 export function formatDate(iso: string): string {
   return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {

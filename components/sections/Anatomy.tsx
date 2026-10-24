@@ -84,7 +84,9 @@ export function Anatomy() {
                     <p className="mt-2 max-w-[19rem] text-[0.9375rem] leading-relaxed text-body">{s.body}</p>
                     {loop && (
                       <p className="label-mono mt-3 flex items-center gap-2 text-[0.6875rem] text-berry lg:hidden">
-                        <span aria-hidden="true">↺</span>
+                        <svg aria-hidden="true" viewBox="0 0 12 12" className="size-3 shrink-0">
+                          <path d="M2.5 6a3.5 3.5 0 1 0 1.1-2.55M2.5 1.5v2.2h2.2" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                         {loop.label}
                       </p>
                     )}

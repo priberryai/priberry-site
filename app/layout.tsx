@@ -19,7 +19,8 @@ const serif = Instrument_Serif({
   display: "swap",
 });
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
-const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap", preload: false });
+// Labels only: preloaded, and "optional" so a late arrival never re-flows the page.
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "optional" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

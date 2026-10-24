@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   reactStrictMode: true,
   poweredByHeader: false,
+  // Inline the (small) stylesheet into each page so it does not block first render.
+  experimental: { inlineCss: true },
 };
 
 export default nextConfig;

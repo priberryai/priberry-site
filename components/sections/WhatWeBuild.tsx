@@ -1,5 +1,6 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { whatWeBuild } from "@/content/what-we-build";
+import { keepHyphenated } from "@/lib/text";
 
 // Seven-circle mark geometry (public/brand/priberry-icon.svg), scaled down.
 const DOTS = [
@@ -24,7 +25,7 @@ export function WhatWeBuild() {
       <div className="container-page">
         <SectionHeader id="build-title" label={whatWeBuild.label} title={whatWeBuild.title} />
 
-        <ul className="mt-14 grid gap-5 md:mt-20 md:grid-cols-3 md:gap-6">
+        <ul className="mt-14 grid gap-5 md:mt-20 lg:grid-cols-3 lg:gap-6">
           {whatWeBuild.products.map((p, i) => (
             <li
               key={p.name}
@@ -57,8 +58,8 @@ export function WhatWeBuild() {
                   })}
                 </svg>
               </div>
-              <h3 className="mt-14 font-serif text-[2rem] leading-[1.05] text-ink md:mt-20">{p.name}</h3>
-              <p className="mt-4 text-body">{p.body}</p>
+              <h3 className="mt-10 font-serif text-[2rem] leading-[1.05] text-ink lg:mt-20">{keepHyphenated(p.name)}</h3>
+              <p className="mt-4 max-w-xl text-body">{keepHyphenated(p.body)}</p>
             </li>
           ))}
         </ul>

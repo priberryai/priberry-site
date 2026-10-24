@@ -7,25 +7,23 @@
     background: var(--color-paper);
     color: var(--color-body);
     -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-padding-top: 88px;
   }
+  /* Performance note: no optimizeLegibility, no overflow clip on body and no
+     text-wrap: pretty on paragraphs. Each measurably slowed layout. Sections
+     with decorative glows clip themselves. */
   body {
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
-    overflow-x: clip;
   }
   h1,
   h2,
   h3 {
     color: var(--color-ink);
     text-wrap: balance;
-  }
-  p {
-    text-wrap: pretty;
   }
   ::selection {
     background: var(--color-blush);
@@ -89,6 +87,19 @@
   }
 }
 
+/* Links inside running text: always underlined (not colour alone), darker on hover */
+@utility link-inline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  transition: text-decoration-color 300ms var(--ease-brand);
+  &:hover,
+  &:focus-visible {
+    text-decoration-color: currentColor;
+  }
+}
+
 /* ---------- Hero headline reveal (CSS so it runs before hydration) ---------- */
 .reveal-word {
   display: inline-block;
@@ -98,12 +109,14 @@
   padding: 0 0.06em 0.12em;
   margin: 0 -0.06em -0.12em;
 }
+/* Starts on the first frame, already a little inside the mask, so the headline
+   paints (and counts for LCP) immediately while still reading as a rise. */
 .reveal-word > span {
   display: inline-block;
-  transform: translateY(105%);
-  opacity: 0;
+  transform: translateY(70%);
+  opacity: 0.01;
   animation: word-rise 900ms var(--ease-brand) forwards;
-  animation-delay: calc(120ms + var(--i) * 38ms);
+  animation-delay: calc(var(--i) * 34ms);
 }
 .reveal-fade {
   opacity: 0;

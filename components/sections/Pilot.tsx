@@ -7,7 +7,7 @@ export function Pilot() {
     <section id="pilot" aria-labelledby="pilot-title" className="section-y relative overflow-hidden border-t border-line">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-40 top-20 -z-10 size-[620px] rounded-full opacity-60 blur-3xl"
+        className="pointer-events-none absolute -left-40 top-20 -z-10 size-[620px] rounded-full opacity-60"
         style={{ background: "radial-gradient(circle, rgb(242 154 185 / 0.35), transparent 65%)" }}
       />
       <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-8">
@@ -28,7 +28,7 @@ export function Pilot() {
           </p>
           <p data-reveal style={{ "--i": 3 } as React.CSSProperties} className="mt-10 text-body">
             Prefer email?{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="link-underline font-medium text-ink">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="link-inline font-medium text-ink">
               {CONTACT_EMAIL}
             </a>
           </p>

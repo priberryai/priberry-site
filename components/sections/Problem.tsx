@@ -58,15 +58,19 @@ export function Problem() {
                 {problem.source.text}{" "}
                 <a
                   href={problem.source.href}
-                  className="link-underline font-medium text-ink"
+                  className="link-inline font-medium text-ink"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   {problem.source.linkLabel}
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>{" "}
-                <a href="#fnref-btb" aria-label="Back to the figure" className="text-berry">
-                  ↩
+                <a href="#fnref-btb" className="link-inline inline-flex items-center gap-1 text-berry">
+                  {/* SVG rather than an arrow glyph, which the subset fonts lack */}
+                  <svg aria-hidden="true" viewBox="0 0 12 12" className="size-3">
+                    <path d="M10 2v3.5a2 2 0 0 1-2 2H2.5M5 5 2.5 7.5 5 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  Back to figure
                 </a>
               </span>
             </li>

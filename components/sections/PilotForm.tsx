@@ -5,6 +5,7 @@ import { pilot } from "@/content/pilot";
 import { CONTACT_EMAIL } from "@/content/site";
 import { HONEYPOT_FIELD, PILOT_FIELDS, TURNSTILE_FIELD } from "@/lib/pilot-fields";
 import type { PilotField } from "@/lib/pilot-schema";
+import { keepHyphenated } from "@/lib/text";
 import { Turnstile } from "./Turnstile";
 
 // The validation rules (zod) load on first focus or submit, not with the page.
@@ -221,7 +222,7 @@ function Field({ name, label, type = "text", autoComplete, hint, optional, error
       </label>
       {hint && (
         <p id={`${id}-hint`} className="mt-1 text-sm text-muted">
-          {hint}
+          {keepHyphenated(hint)}
         </p>
       )}
       <div className="mt-auto pt-2.5">
