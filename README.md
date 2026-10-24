@@ -37,12 +37,12 @@ All words on the site live in `/content`:
 | File | Section |
 | --- | --- |
 | `content/site.ts` | Contact email (`CONTACT_EMAIL`), nav, footer, site title and description |
-| `content/hero.ts` | Hero headline, subhead, buttons |
-| `content/grading-example.ts` | The illustrative grading panel (task, answer, rubric, weights) |
+| `content/hero.ts` | Hero headline, subhead, buttons, caption under the motion graphic |
+| `content/grading-example.ts` | The illustrative worked example (task, answer, rubric, weights) |
+| `content/grade-story.ts` | The scroll-driven grade story: chapter titles, memo header, verdict |
 | `content/problem.ts` | The 16% figure, caption and source note |
 | `content/how-it-works.ts` | The four steps and their deliverables |
 | `content/what-we-build.ts` | The three product cards |
-| `content/anatomy.ts` | "Our method" pipeline stages and loops |
 | `content/principles.ts` | The four principles |
 | `content/who.ts` | Who we work with |
 | `content/notes.ts` | Notes posts (the article body is structured content) |
