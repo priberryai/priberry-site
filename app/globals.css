@@ -200,6 +200,189 @@ html:not(.js) .step-dot-fill {
   }
 }
 
+/* ---------- Grade story (components/grade-story/GradeStory.tsx) ----------
+   data-mode="static" (server render, no JS, reduced motion): a normal block.
+   data-mode="scroll": a tall section with a pinned stage; the scroll drives it. */
+.story-grid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+@media (width >= 1024px) {
+  .story-grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: clamp(2.5rem, 4vw, 4.5rem);
+  }
+}
+.story-card {
+  overflow: hidden;
+  border-radius: var(--radius-panel);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-panel);
+  outline: 1px solid var(--color-line);
+}
+.story-panes {
+  display: grid;
+}
+@media (width >= 1024px) {
+  .story-panes {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  }
+}
+
+/* Static */
+.story[data-mode="static"] {
+  padding-block: clamp(5rem, 3rem + 7vw, 10rem);
+}
+.story[data-mode="static"] .story-captions {
+  display: grid;
+  gap: 2.5rem;
+}
+.story[data-mode="static"] .story-progress {
+  display: none;
+}
+.story[data-mode="static"] .story-verdict {
+  margin-top: 4rem;
+  padding-block: 4.5rem;
+  background: var(--color-ink);
+}
+
+/* Scroll-driven */
+.story[data-mode="scroll"] {
+  height: 520vh;
+}
+@media (width < 1024px) {
+  .story[data-mode="scroll"] {
+    height: 460vh;
+  }
+}
+.story[data-mode="scroll"] .story-stage {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 100svh;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.story[data-mode="scroll"] .story-captions {
+  display: grid;
+}
+.story[data-mode="scroll"] .story-caption {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 450ms var(--ease-brand),
+    transform 550ms var(--ease-brand);
+  pointer-events: none;
+}
+.story[data-mode="scroll"] .story-caption[data-active] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.story[data-mode="scroll"] .story-verdict {
+  position: absolute;
+  inset: 0;
+  background: var(--color-ink);
+  opacity: var(--ink, 0);
+  pointer-events: none;
+}
+.story[data-mode="scroll"] .story-verdict > div {
+  transform: translateY(calc((1 - var(--ink, 0)) * 24px));
+}
+
+/* The nav turns to ink while the verdict is under it, like Apple's dark sections. */
+.site-header .nav-bg,
+.site-header nav > a,
+.site-header nav ul a,
+.site-header button {
+  transition:
+    opacity 500ms var(--ease-brand),
+    background-color 400ms var(--ease-brand),
+    color 400ms var(--ease-brand),
+    border-color 400ms var(--ease-brand);
+}
+html[data-nav-ink] .site-header .nav-bg {
+  background-color: rgb(30 21 48 / 0.82);
+  border-color: rgb(250 248 245 / 0.1);
+}
+html[data-nav-ink] .site-header nav > a,
+html[data-nav-ink] .site-header nav ul a,
+html[data-nav-ink] .site-header button {
+  color: var(--color-on-ink);
+}
+html[data-nav-ink] .site-header button {
+  --tw-ring-color: rgb(250 248 245 / 0.28);
+}
+
+/* Short phones: keep the pinned stage inside one screen. */
+@media (width < 640px) {
+  .story[data-mode="scroll"] .story-memo {
+    display: none;
+  }
+  .story[data-mode="scroll"] .story-caption h3 {
+    font-size: 1.625rem;
+  }
+  .story[data-mode="scroll"] .story-caption p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+}
+@media (width < 1024px) and (max-height: 760px) {
+  .story[data-mode="scroll"] .story-caption p {
+    display: none;
+  }
+}
+/* Compact density for short viewports (small phones, 768px-tall laptops). */
+@media (max-height: 820px) {
+  .story[data-mode="scroll"] .story-pane {
+    padding: 1rem 1.25rem;
+  }
+  .story[data-mode="scroll"] .story-task {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .story[data-mode="scroll"] .story-answer {
+    font-size: 0.96875rem;
+    line-height: 1.45;
+  }
+  .story[data-mode="scroll"] .story-row {
+    padding-block: 6px;
+  }
+  .story[data-mode="scroll"] .story-score {
+    font-size: 2.5rem;
+  }
+}
+@media (width < 1024px) and (max-height: 700px) {
+  .story[data-mode="scroll"] .story-stage {
+    padding-top: 64px;
+  }
+  .story[data-mode="scroll"] .story-grid {
+    gap: 0.75rem;
+  }
+}
+
+/* Phones and tablets while scrolling: one pane at a time, stacked in the
+   same cell so the card never changes height (no layout shift). */
+@media (width < 1024px) {
+  .story[data-mode="scroll"] .story-grid {
+    gap: 1.25rem;
+  }
+  .story[data-mode="scroll"] .story-pane {
+    grid-area: 1 / 1;
+    transition: opacity 450ms var(--ease-brand);
+  }
+  .story[data-mode="scroll"] .story-card[data-pane="a"] .story-pane-b,
+  .story[data-mode="scroll"] .story-card[data-pane="b"] .story-pane-a {
+    opacity: 0;
+  }
+  .story[data-mode="scroll"] .story-pane-a {
+    padding-bottom: 1rem;
+  }
+}
+
 /* ---------- Lenis smooth scroll ---------- */
 html.lenis,
 html.lenis body {

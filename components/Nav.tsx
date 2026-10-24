@@ -35,10 +35,10 @@ export function Nav() {
   const solid = scrolled || open;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="site-header fixed inset-x-0 top-0 z-50">
       <div
         aria-hidden="true"
-        className={`absolute inset-0 border-b border-line bg-paper/80 backdrop-blur-xl backdrop-saturate-150 transition-opacity duration-500 ease-(--ease-brand) ${
+        className={`nav-bg absolute inset-0 border-b border-line bg-paper/80 backdrop-blur-xl backdrop-saturate-150 transition-opacity duration-500 ease-(--ease-brand) ${
           solid ? "opacity-100" : "opacity-0"
         }`}
       />

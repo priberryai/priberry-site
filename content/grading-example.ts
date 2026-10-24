@@ -1,4 +1,4 @@
-// The invented example shown in the hero grading panel. It is labelled
+// The invented example used by the scroll-driven grade story. It is labelled
 // "Illustrative example" on the page. Every figure here is made up and
 // internally consistent: 410 / 38 = 10.8x reported; 410 / 34 = 12.1x adjusted.
 

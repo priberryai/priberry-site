@@ -1,6 +1,6 @@
 # Priberry design direction: from "well built" to "obviously made by people"
 
-Research date: 24 October 2026. Status: **proposal, awaiting approval.** Nothing here is built yet.
+Research date: 24 October 2026. Status: **approved; in progress.** Built so far: type (Funnel), the "From noise to judgement" hero, the scroll-driven grade story. Next: redesign the remaining sections to the same standard.
 
 ## 1. The honest verdict on the current site
 

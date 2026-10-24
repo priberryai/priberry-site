@@ -24,9 +24,11 @@ type BerryMarkProps = {
   filled: boolean[];
   verdictFilled: boolean;
   className?: string;
+  /** Lighter empty rings for use on the ink background. */
+  onInk?: boolean;
 };
 
-export function BerryMark({ filled, verdictFilled, className }: BerryMarkProps) {
+export function BerryMark({ filled, verdictFilled, className, onInk }: BerryMarkProps) {
   const on = new Set<number>();
   filled.forEach((f, row) => {
     const idx = ROW_TO_CIRCLE[row];
@@ -39,7 +41,14 @@ export function BerryMark({ filled, verdictFilled, className }: BerryMarkProps) 
       {CIRCLES.map(([cx, cy, fill], i) => (
         <g key={i}>
           {/* Empty state: a quiet ring */}
-          <circle cx={cx} cy={cy} r={R - 1.5} fill="none" stroke="rgb(30 21 48 / 0.16)" strokeWidth="3" />
+          <circle
+            cx={cx}
+            cy={cy}
+            r={R - 1.5}
+            fill="none"
+            stroke={onInk ? "rgb(250 248 245 / 0.22)" : "rgb(30 21 48 / 0.16)"}
+            strokeWidth={onInk ? 2 : 3}
+          />
           {/* Filled state: scales in from the centre */}
           <circle
             cx={cx}

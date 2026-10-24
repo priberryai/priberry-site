@@ -1,4 +1,4 @@
-import { GradingPanel } from "@/components/grading-panel/GradingPanel";
+import { GradeStory } from "@/components/grade-story/GradeStory";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
@@ -10,15 +10,11 @@ import { WhatWeBuild } from "@/components/sections/WhatWeBuild";
 import { Who } from "@/components/sections/Who";
 
 // Section order follows docs/design-direction.md. Copy for each lives in /content.
-// The grading panel below is interim: the scroll-driven grade story replaces it
-// (and the old "Anatomy" section, now removed) in the next step.
 export default function Home() {
   return (
     <>
       <Hero />
-      <section aria-label="An illustrative grade" className="container-page pb-28 pt-8 md:pb-36">
-        <GradingPanel />
-      </section>
+      <GradeStory />
       <Problem />
       <HowItWorks />
       <WhatWeBuild />
