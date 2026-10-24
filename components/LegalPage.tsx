@@ -8,11 +8,11 @@ export function LegalPage({ title, intro, sections }: LegalPageProps) {
     <article className="pb-28 pt-36 md:pb-40 md:pt-48">
       <div className="container-page">
         <div className="mx-auto max-w-[44rem]">
-          <p className="label-mono text-berry">Legal</p>
-          <h1 className="mt-6 font-serif text-[clamp(2.75rem,2rem+3vw,4.5rem)] leading-none tracking-[-0.02em] text-ink">
+          <p className="label text-berry">Legal</p>
+          <h1 className="mt-6 font-display text-[clamp(2.75rem,2rem+3vw,4.5rem)] leading-none tracking-[-0.02em] text-ink">
             {title}
           </h1>
-          <p className="label-mono mt-6 text-muted">
+          <p className="label mt-6 text-muted">
             Last updated <time dateTime={LEGAL_UPDATED}>{formatDate(LEGAL_UPDATED)}</time>
           </p>
           {!LEGAL_REVIEWED && (
@@ -24,7 +24,7 @@ export function LegalPage({ title, intro, sections }: LegalPageProps) {
           <div className="mt-12 space-y-12">
             {sections.map((s) => (
               <section key={s.heading}>
-                <h2 className="font-serif text-[1.875rem] leading-tight text-ink">{s.heading}</h2>
+                <h2 className="font-display text-[1.875rem] leading-tight text-ink">{s.heading}</h2>
                 <div className="mt-4 space-y-4 text-[1.0625rem] leading-[1.7] text-body">
                   {s.paragraphs.map((p) => (
                     <p key={p}>{p}</p>

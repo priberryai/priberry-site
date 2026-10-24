@@ -44,13 +44,13 @@ export default async function NotePage({ params }: { params: Promise<Params> }) 
     <article className="pb-28 pt-36 md:pb-40 md:pt-48">
       <div className="container-page">
         <div className="mx-auto max-w-[44rem]">
-          <a href="/#notes" className="label-mono text-berry">
+          <a href="/#notes" className="label text-berry">
             <span className="link-underline">Notes</span>
           </a>
-          <h1 className="mt-6 font-serif text-[clamp(2.5rem,1.8rem+3vw,4.25rem)] leading-[1.02] tracking-[-0.02em] text-ink">
+          <h1 className="mt-6 font-display text-[clamp(2.5rem,1.8rem+3vw,4.25rem)] leading-[1.02] tracking-[-0.02em] text-ink">
             {displayTitle(note.title)}
           </h1>
-          <p className="label-mono mt-8 text-muted">
+          <p className="label mt-8 text-muted">
             <time dateTime={note.date}>{formatDate(note.date)}</time> · {readingMinutes(note)} min read · {note.author}
           </p>
           <p className="mt-10 border-t border-line-strong pt-10 text-lead text-ink">{note.summary}</p>
@@ -59,7 +59,7 @@ export default async function NotePage({ params }: { params: Promise<Params> }) 
             {note.body.map((b, i) => {
               if (b.type === "h2")
                 return (
-                  <h2 key={i} className="!mt-14 font-serif text-[2rem] leading-tight text-ink">
+                  <h2 key={i} className="!mt-14 font-display text-[2rem] leading-tight text-ink">
                     {b.text}
                   </h2>
                 );
@@ -76,7 +76,7 @@ export default async function NotePage({ params }: { params: Promise<Params> }) 
           </div>
 
           <div className="mt-16 flex flex-col gap-6 rounded-(--radius-card) bg-lilac p-8 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-sm font-serif text-[1.625rem] leading-tight text-ink">
+            <p className="max-w-sm font-display text-[1.625rem] leading-tight text-ink">
               See where your model breaks on your own workflows.
             </p>
             <ButtonLink href="/#pilot" arrow>

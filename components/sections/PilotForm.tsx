@@ -107,7 +107,7 @@ export function PilotForm() {
           <circle cx="24" cy="24" r="23" fill="#2F7D5B" />
           <path d="m15 24.5 6 6 12-13" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <h3 ref={successHeading} tabIndex={-1} className="mt-8 font-serif text-[2.25rem] leading-tight text-ink outline-none">
+        <h3 ref={successHeading} tabIndex={-1} className="mt-8 font-display text-[2.25rem] leading-tight text-ink outline-none">
           {pilot.success.title}
         </h3>
         <p className="mt-4 max-w-md text-body">{pilot.success.body}</p>

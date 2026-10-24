@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Funnel_Display, Funnel_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
@@ -10,17 +10,16 @@ import "./globals.css";
 
 const CF_BEACON_TOKEN = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN;
 
+// One family, two optical cuts (provisional choice from docs/type-specimen).
 // next/font downloads these at build time and serves them from our own origin.
-const serif = Instrument_Serif({
+// To change the typeface, change these two imports only.
+const display = Funnel_Display({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
+  weight: ["500", "600"],
+  variable: "--font-funnel-display",
   display: "swap",
 });
-const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
-// Labels only: preloaded, and "optional" so a late arrival never re-flows the page.
-const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "optional" });
+const sans = Funnel_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-funnel-sans", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -66,7 +65,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+      className={`${display.variable} ${sans.variable}`}
       suppressHydrationWarning
     >
       <head>

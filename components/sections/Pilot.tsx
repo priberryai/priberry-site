@@ -12,14 +12,14 @@ export function Pilot() {
       />
       <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-5">
-          <p data-reveal className="label-mono text-berry">
+          <p data-reveal className="label text-berry">
             {pilot.label}
           </p>
           <h2
             id="pilot-title"
             data-reveal
             style={{ "--i": 1 } as React.CSSProperties}
-            className="mt-5 font-serif text-[clamp(2.75rem,1.9rem+3.6vw,4.75rem)] leading-[1] tracking-[-0.02em] text-ink"
+            className="mt-5 font-display text-[clamp(2.75rem,1.9rem+3.6vw,4.75rem)] leading-[1] tracking-[-0.02em] text-ink"
           >
             {pilot.title}
           </h2>

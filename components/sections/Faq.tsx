@@ -8,14 +8,14 @@ export function Faq() {
     <section id="faq" aria-labelledby="faq-title" className="section-y bg-lilac">
       <div className="container-page grid gap-12 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-4">
-          <p data-reveal className="label-mono text-berry">
+          <p data-reveal className="label text-berry">
             {faq.label}
           </p>
           <h2
             id="faq-title"
             data-reveal
             style={{ "--i": 1 } as React.CSSProperties}
-            className="mt-5 font-serif text-display text-ink"
+            className="mt-5 font-display text-display text-ink"
           >
             {faq.title}
           </h2>

@@ -109,8 +109,8 @@ export function GradingPanel() {
       <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-3.5 sm:px-7">
         <div className="flex min-w-0 items-center gap-2.5">
           <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-blush" />
-          <span className="label-mono truncate text-ink">{ex.label}</span>
-          <span aria-hidden="true" className="label-mono hidden text-muted sm:inline">
+          <span className="label truncate text-ink">{ex.label}</span>
+          <span aria-hidden="true" className="label hidden text-muted sm:inline">
             · {ex.field}
           </span>
         </div>
@@ -119,7 +119,7 @@ export function GradingPanel() {
             type="button"
             onClick={() => setUserPaused((p) => !p)}
             aria-pressed={userPaused}
-            className="label-mono inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full px-3 text-muted transition-colors hover:text-ink -my-2 -mr-3"
+            className="label inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full px-3 text-muted transition-colors hover:text-ink -my-2 -mr-3"
           >
             <svg aria-hidden="true" viewBox="0 0 12 12" className="size-3">
               {userPaused ? (
@@ -143,16 +143,16 @@ export function GradingPanel() {
       >
         {/* Task and answer */}
         <div className="border-b border-line p-5 sm:p-7 lg:border-b-0 lg:border-r lg:p-9">
-          <p className="label-mono text-muted">Task</p>
+          <p className="label text-muted">Task</p>
           <p className="mt-3 text-[0.96875rem] leading-[1.65] text-ink">{ex.task}</p>
 
-          <p className="label-mono mt-7 text-muted">Model answer</p>
+          <p className="label mt-7 text-muted">Model answer</p>
           <div
             className={`mt-3 rounded-(--radius-inner) bg-lilac p-5 ${fade} ${
               answerShown ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
             }`}
           >
-            <p className="font-serif text-[1.3125rem] leading-[1.42] text-ink">
+            <p className="font-display text-[1.3125rem] leading-[1.42] text-ink">
               {ex.answer.before}
               <span className="relative whitespace-nowrap">
                 {ex.answer.flagged}
@@ -169,7 +169,7 @@ export function GradingPanel() {
                 flagShown ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
               }`}
             >
-              <span className="label-mono shrink-0 pt-[3px] text-berry">Expert note</span>
+              <span className="label shrink-0 pt-[3px] text-berry">Expert note</span>
               <span className="text-[0.875rem] leading-snug text-body">{ex.answer.flagNote}</span>
             </div>
           </div>
@@ -178,8 +178,8 @@ export function GradingPanel() {
         {/* Rubric and score */}
         <div className="flex flex-col p-5 sm:p-7 lg:p-9">
           <div className="flex items-baseline justify-between">
-            <p className="label-mono text-muted">Expert rubric</p>
-            <p className="label-mono text-muted">Weight</p>
+            <p className="label text-muted">Expert rubric</p>
+            <p className="label text-muted">Weight</p>
           </div>
 
           <ol className="mt-3">
@@ -201,7 +201,7 @@ export function GradingPanel() {
                     {c.text}
                     {c.note && (
                       <span
-                        className={`label-mono ml-2 inline-block text-[0.6875rem] text-berry transition-opacity duration-500 ${
+                        className={`label ml-2 inline-block text-[0.6875rem] text-berry transition-opacity duration-500 ${
                           against ? "opacity-100" : "opacity-0"
                         }`}
                       >
@@ -229,8 +229,8 @@ export function GradingPanel() {
 
           <div className="mt-auto flex items-end justify-between gap-4 border-t border-line pt-5">
             <div>
-              <p className="label-mono text-muted">Score</p>
-              <p className="mt-1 flex items-baseline gap-2 font-serif text-ink">
+              <p className="label text-muted">Score</p>
+              <p className="mt-1 flex items-baseline gap-2 font-display text-ink">
                 <span className="inline-block min-w-[1.1ch] text-right text-[3.5rem] leading-none tabular-nums">
                   {score}
                 </span>
@@ -241,8 +241,8 @@ export function GradingPanel() {
                   verdictShown ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
                 }`}
               >
-                <span className="label-mono text-muted">{ex.verdictLabel}</span>
-                <span className="label-mono rounded-full bg-[#FBEFF4] px-2 py-0.5 text-berry-deep">{ex.verdict}</span>
+                <span className="label text-muted">{ex.verdictLabel}</span>
+                <span className="label rounded-full bg-[#FBEFF4] px-2 py-0.5 text-berry-deep">{ex.verdict}</span>
               </p>
             </div>
             <BerryMark

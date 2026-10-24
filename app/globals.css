@@ -24,6 +24,14 @@
   h3 {
     color: var(--color-ink);
     text-wrap: balance;
+    font-weight: 600;
+  }
+  .font-display {
+    font-feature-settings: "ss01" 0;
+  }
+  .tabular-nums,
+  .font-mono {
+    font-variant-numeric: tabular-nums;
   }
   ::selection {
     background: var(--color-blush);
@@ -55,12 +63,13 @@
   padding-block: clamp(5rem, 3rem + 7vw, 10rem);
 }
 
-@utility label-mono {
-  font-family: var(--font-mono);
+/* Small section label: sentence case, medium weight. No uppercase, no mono,
+   no wide tracking (the research lists those as AI-template tells). */
+@utility label {
+  font-family: var(--font-sans);
   font-size: var(--text-label);
   line-height: var(--text-label--line-height);
   letter-spacing: var(--text-label--letter-spacing);
-  text-transform: uppercase;
   font-weight: 500;
 }
 
@@ -100,35 +109,32 @@
   }
 }
 
-/* ---------- Hero headline reveal (CSS so it runs before hydration) ---------- */
-.reveal-word {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-  /* room for serif descenders and italic overhang inside the mask */
-  padding: 0 0.06em 0.12em;
-  margin: 0 -0.06em -0.12em;
+/* ---------- Hero: static halftone mark hands over to the WebGL field ---------- */
+.hero-canvas {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-brand);
 }
-/* Starts on the first frame, already a little inside the mask, so the headline
-   paints (and counts for LCP) immediately while still reading as a rise. */
-.reveal-word > span {
-  display: inline-block;
-  transform: translateY(70%);
-  opacity: 0.01;
-  animation: word-rise 900ms var(--ease-brand) forwards;
-  animation-delay: calc(var(--i) * 34ms);
+.hero-static {
+  transition: opacity 500ms var(--ease-brand);
 }
+.hero[data-field="on"] .hero-canvas {
+  opacity: 1;
+}
+/* With JavaScript and motion allowed, the field draws the mark itself, so the
+   static version stays hidden unless HeroField falls back (data-field="fallback").
+   Without JavaScript the "js" class is never set and the static mark shows. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero:not([data-field="fallback"]) .hero-static {
+    opacity: 0;
+  }
+}
+
+/* Supporting hero lines settle in just after the headline. */
 .reveal-fade {
   opacity: 0;
   transform: translateY(12px);
   animation: fade-rise 800ms var(--ease-brand) forwards;
   animation-delay: var(--d, 500ms);
-}
-@keyframes word-rise {
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
 @keyframes fade-rise {
   to {

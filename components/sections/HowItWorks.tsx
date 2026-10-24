@@ -29,13 +29,13 @@ export function HowItWorks() {
                     <span className="relative">{String(i + 1).padStart(2, "0")}</span>
                   </span>
                   <div className="rounded-(--radius-card) bg-surface p-5 shadow-[0_1px_0_rgb(30_21_48/0.04)] ring-1 ring-line sm:p-6 md:p-8">
-                    <h3 className="font-serif text-[2rem] leading-none text-ink">
+                    <h3 className="font-display text-[2rem] leading-none text-ink">
                       <span className="sr-only">Step {i + 1}: </span>
                       {s.name}
                     </h3>
                     <p className="mt-4 text-body">{s.body}</p>
                     <p className="mt-6 flex flex-col gap-1.5 border-t border-line pt-4 sm:flex-row sm:items-baseline sm:gap-3">
-                      <span className="label-mono shrink-0 text-berry">Deliverable</span>
+                      <span className="label shrink-0 text-berry">Deliverable</span>
                       <span className="text-[0.9375rem] font-medium text-ink">{s.deliverable}</span>
                     </p>
                   </div>

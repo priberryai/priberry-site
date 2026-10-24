@@ -1,46 +1,70 @@
 import { ButtonLink } from "@/components/Button";
-import { GradingPanel } from "@/components/grading-panel/GradingPanel";
+import { HeroField } from "@/components/hero/HeroField";
 import { hero } from "@/content/hero";
 
-// Splits a sentence into masked words that rise in sequence (pure CSS, so it
-// plays from first paint, before any JavaScript loads).
-function RevealWords({ text, offset }: { text: string; offset: number }) {
-  return text.split(" ").map((word, i) => (
-    <span key={i}>
-      <span className="reveal-word">
-        <span style={{ "--i": offset + i } as React.CSSProperties}>{word}</span>
-      </span>{" "}
-    </span>
-  ));
-}
+// Seven-circle mark geometry (public/brand/priberry-icon.svg).
+const CIRCLES = [
+  [-40, -69, "berry"],
+  [40, -69, "blush"],
+  [-80, 0, "berry"],
+  [0, 0, "deep"],
+  [80, 0, "berry"],
+  [-40, 69, "deep"],
+  [40, 69, "berry"],
+] as const;
+const FILL = { berry: "#B3265F", blush: "#F29AB9", deep: "#8A1B49" } as const;
 
+/*
+ * Hero: "From noise to judgement". The headline paints first and is the LCP.
+ * The WebGL field (components/hero) starts when the browser is idle and takes
+ * over the mark box below; until then, and for reduced motion or no WebGL, the
+ * same mark is drawn as a static halftone SVG in the same box.
+ */
 export function Hero() {
-  const [first, second] = hero.headline;
-  const firstCount = first.split(" ").length;
-
   return (
-    <section aria-labelledby="hero-title" className="relative isolate overflow-hidden pt-32 md:pt-44">
-      <HexDots />
+    <section
+      aria-labelledby="hero-title"
+      className="hero relative isolate flex min-h-[max(100svh,640px)] flex-col overflow-hidden"
+    >
+      <HeroField markId="hero-mark" quietId="hero-copy" />
 
-      <div className="container-page">
-        <p className="label-mono reveal-fade text-berry" style={{ "--d": "40ms" } as React.CSSProperties}>
-          {hero.eyebrow}
+      {/* The mark box: shared by the SVG fallback and the WebGL targets. */}
+      <div
+        id="hero-mark"
+        aria-hidden="true"
+        className="absolute left-1/2 top-[92px] aspect-[236/214] w-[min(74vw,340px)] -translate-x-1/2 lg:left-auto lg:right-[max(3vw,calc((100vw-1264px)/2))] lg:top-1/2 lg:w-[min(39vw,560px)] lg:-translate-y-[54%] lg:translate-x-0"
+      >
+        <svg viewBox="-118 -107 236 214" className="hero-static h-full w-full">
+          <defs>
+            {Object.entries(FILL).map(([name, color]) => (
+              // Same hex spacing as the WebGL dots (~11px at desktop size), so the hand-over is seamless.
+              <pattern key={name} id={`halftone-${name}`} width="4.6" height="7.967" patternUnits="userSpaceOnUse">
+                <circle cx="1.15" cy="1.15" r="0.9" fill={color} />
+                <circle cx="3.45" cy="5.134" r="0.9" fill={color} />
+              </pattern>
+            ))}
+          </defs>
+          {CIRCLES.map(([cx, cy, tone]) => (
+            <circle key={`${cx}${cy}`} cx={cx} cy={cy} r={37} fill={`url(#halftone-${tone})`} />
+          ))}
+        </svg>
+        <p className="absolute -bottom-10 left-0 right-0 hidden text-center text-[0.8125rem] text-muted lg:block">
+          {hero.caption}
         </p>
+      </div>
 
-        <h1 id="hero-title" className="mt-6 font-serif text-hero text-ink md:max-w-[24ch] lg:max-w-[30ch]">
-          <span className="block">
-            <RevealWords text={first} offset={0} />
-          </span>
-          <span className="block italic text-berry">
-            <RevealWords text={second} offset={firstCount} />
-          </span>
-        </h1>
-
-        <div className="mt-8 grid items-end gap-8 md:mt-10 lg:grid-cols-[minmax(0,40rem)_auto] lg:justify-between">
-          <p className="reveal-fade max-w-[40rem] text-lead text-body" style={{ "--d": "520ms" } as React.CSSProperties}>
+      <div className="container-page relative mt-auto pb-14 pt-[calc(92px+min(74vw,340px)*0.907+40px)] lg:pb-[clamp(56px,9vh,112px)] lg:pt-40">
+        <div id="hero-copy" className="max-w-[40rem] lg:max-w-[min(48vw,40rem)]">
+          <h1 id="hero-title" className="font-display text-hero text-ink">
+            {hero.headline}
+          </h1>
+          <p
+            className="reveal-fade mt-6 max-w-[34rem] text-[clamp(1.1875rem,1.05rem+0.5vw,1.5rem)] font-medium leading-[1.35] tracking-[-0.012em] text-body"
+            style={{ "--d": "120ms" } as React.CSSProperties}
+          >
             {hero.subhead}
           </p>
-          <div className="reveal-fade flex flex-wrap gap-2.5 sm:gap-3" style={{ "--d": "640ms" } as React.CSSProperties}>
+          <div className="reveal-fade mt-9 flex flex-wrap gap-2.5 sm:gap-3" style={{ "--d": "240ms" } as React.CSSProperties}>
             <ButtonLink href={hero.primary.href} arrow>
               {hero.primary.label}
             </ButtonLink>
@@ -48,42 +72,9 @@ export function Hero() {
               {hero.secondary.label}
             </ButtonLink>
           </div>
-        </div>
-      </div>
-
-      <div className="container-page mt-14 pb-24 md:mt-20 md:pb-32">
-        <div className="reveal-fade relative" style={{ "--d": "760ms" } as React.CSSProperties}>
-          {/* Soft berry glow behind the panel */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -inset-x-10 -top-16 bottom-10 -z-10 rounded-[48px] opacity-70"
-            style={{
-              background:
-                "radial-gradient(60% 55% at 70% 40%, rgb(242 154 185 / 0.35), transparent 70%), radial-gradient(50% 60% at 20% 70%, rgb(90 45 130 / 0.14), transparent 70%)",
-            }}
-          />
-          <GradingPanel />
+          <p className="mt-8 text-[0.8125rem] text-muted lg:hidden">{hero.caption}</p>
         </div>
       </div>
     </section>
-  );
-}
-
-// Static hexagonal dot field echoing the seven-circle mark. The fade is a paper
-// gradient layered on top in the same element (cheaper to paint than mask-image).
-function HexDots() {
-  return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[900px]"
-      style={{
-        backgroundImage:
-          "radial-gradient(70% 60% at 75% 20%, transparent 10%, var(--color-paper) 75%), " +
-          "radial-gradient(circle, rgb(30 21 48 / 0.10) 1.1px, transparent 1.6px), " +
-          "radial-gradient(circle, rgb(30 21 48 / 0.10) 1.1px, transparent 1.6px)",
-        backgroundSize: "100% 100%, 28px 48.5px, 28px 48.5px",
-        backgroundPosition: "0 0, 0 0, 14px 24.25px",
-      }}
-    />
   );
 }

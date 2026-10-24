@@ -13,10 +13,10 @@ export function Notes() {
                 href={`/notes/${n.slug}/`}
                 className="group flex h-full flex-col rounded-(--radius-card) bg-surface p-7 ring-1 ring-line transition-[transform,box-shadow] duration-500 ease-(--ease-brand) hover:-translate-y-1 hover:shadow-(--shadow-panel) md:p-9"
               >
-                <p className="label-mono text-muted">
+                <p className="label text-muted">
                   <time dateTime={n.date}>{formatDate(n.date)}</time> · {readingMinutes(n)} min read
                 </p>
-                <h3 className="mt-8 font-serif text-[2rem] leading-[1.08] text-ink md:text-[2.375rem]">{displayTitle(n.title)}</h3>
+                <h3 className="mt-8 font-display text-[2rem] leading-[1.08] text-ink md:text-[2.375rem]">{displayTitle(n.title)}</h3>
                 <p className="mt-4 text-body">{n.summary}</p>
                 <p className="mt-auto flex items-center gap-2 pt-8 text-[0.9375rem] font-medium text-berry">
                   <span className="link-underline">{notesSection.readMore}</span>
@@ -37,7 +37,7 @@ export function Notes() {
             style={{ "--i": notes.length } as React.CSSProperties}
             className="flex min-h-56 flex-col justify-between rounded-(--radius-card) border border-dashed border-line-strong p-7 md:p-9"
           >
-            <p className="label-mono text-muted">Next note</p>
+            <p className="label text-muted">Next note</p>
             <p className="max-w-sm text-body">
               More on rubric design and failure analysis is in progress. New notes will appear here.
             </p>

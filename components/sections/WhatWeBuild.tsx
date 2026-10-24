@@ -34,7 +34,7 @@ export function WhatWeBuild() {
               className="group relative flex flex-col rounded-(--radius-card) bg-surface p-7 ring-1 ring-line transition-[transform,box-shadow] duration-500 ease-(--ease-brand) hover:-translate-y-1 hover:shadow-(--shadow-panel) md:p-8"
             >
               <div className="flex items-start justify-between">
-                <p className="label-mono text-muted">
+                <p className="label text-muted">
                   {String(i + 1).padStart(2, "0")} · {p.tag}
                 </p>
                 <svg viewBox="-120 -109 240 218" aria-hidden="true" className="w-11 shrink-0">
@@ -58,7 +58,7 @@ export function WhatWeBuild() {
                   })}
                 </svg>
               </div>
-              <h3 className="mt-10 font-serif text-[2rem] leading-[1.05] text-ink lg:mt-20">{keepHyphenated(p.name)}</h3>
+              <h3 className="mt-10 font-display text-[2rem] leading-[1.05] text-ink lg:mt-20">{keepHyphenated(p.name)}</h3>
               <p className="mt-4 max-w-xl text-body">{keepHyphenated(p.body)}</p>
             </li>
           ))}

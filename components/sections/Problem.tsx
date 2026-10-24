@@ -6,17 +6,17 @@ export function Problem() {
     <section aria-labelledby="problem-title" className="section-y border-t border-line">
       <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-6">
-          <p data-reveal className="label-mono text-berry">
+          <p data-reveal className="label text-berry">
             {problem.label}
           </p>
           <h2
             id="problem-title"
             data-reveal
             style={{ "--i": 1 } as React.CSSProperties}
-            className="mt-5 font-serif text-display text-ink"
+            className="mt-5 font-display text-display text-ink"
           >
             <span className="block">{problem.title[0]}</span>
-            <span className="block italic text-berry">{problem.title[1]}</span>
+            <span className="block text-muted">{problem.title[1]}</span>
           </h2>
           <p data-reveal style={{ "--i": 2 } as React.CSSProperties} className="mt-8 max-w-xl text-lead text-body">
             {problem.followUp}
@@ -24,11 +24,11 @@ export function Problem() {
         </div>
 
         <figure className="lg:col-span-5 lg:col-start-8 lg:pt-6">
-          <p data-reveal className="font-serif leading-[0.85] tracking-[-0.04em] text-berry">
+          <p data-reveal className="font-display leading-[0.85] tracking-[-0.04em] text-berry">
             <CountUp
               value={problem.stat.value}
               suffix={problem.stat.suffix}
-              className="text-[clamp(7rem,4rem+14vw,13.5rem)]"
+              className="text-[clamp(6.5rem,3rem+12vw,12rem)]"
             />
           </p>
           <figcaption

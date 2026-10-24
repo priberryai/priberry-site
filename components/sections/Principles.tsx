@@ -10,14 +10,14 @@ export function Principles() {
         style={{ background: "radial-gradient(circle, rgb(179 38 95 / 0.55), transparent 65%)" }}
       />
       <div className="container-page relative">
-        <p data-reveal className="label-mono text-blush">
+        <p data-reveal className="label text-blush">
           {principles.label}
         </p>
         <h2
           id="principles-title"
           data-reveal
           style={{ "--i": 1 } as React.CSSProperties}
-          className="mt-5 max-w-3xl font-serif text-display text-on-ink"
+          className="mt-5 max-w-3xl font-display text-display text-on-ink"
         >
           {principles.title}
         </h2>
@@ -33,7 +33,7 @@ export function Principles() {
               <p aria-hidden="true" className="font-mono text-[0.8125rem] text-blush">
                 {String(i + 1).padStart(2, "0")}
               </p>
-              <h3 className="mt-8 font-serif text-[2.25rem] leading-[1.05] text-on-ink">{p.name}</h3>
+              <h3 className="mt-8 font-display text-[2.25rem] leading-[1.05] text-on-ink">{p.name}</h3>
               <p className="mt-4 max-w-md text-on-ink-muted">{p.body}</p>
             </li>
           ))}

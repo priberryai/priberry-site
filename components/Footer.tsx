@@ -17,7 +17,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7">
             {footer.groups.map((g) => (
               <nav key={g.title} aria-label={g.title}>
-                <h2 className="label-mono text-on-ink-muted">{g.title}</h2>
+                <h2 className="label text-on-ink-muted">{g.title}</h2>
                 <ul className="mt-5 space-y-3">
                   {g.links.map((l) => (
                     <li key={l.href}>
