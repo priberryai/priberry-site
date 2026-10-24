@@ -1,8 +1,13 @@
 export const pilot = {
-  label: "Request a pilot",
+  next: [
+    { title: "We reply within two working days", body: "From a person on our team, not an autoresponder." },
+    { title: "A short scoping call", body: "The workflow, the failure you care about, and whether we can staff it well." },
+    { title: "A free sample", body: "A few graded tasks in your field, before you commit to anything." },
+  ],
+  nextTitle: "What happens next",
   title: "Show us where your model breaks.",
   intro:
-    "Tell us the field and the workflow. We will reply within two working days with a short scoping call, and a free sample after that.",
+    "Tell us the field, the workflow and what your model gets wrong. A practitioner reads every request.",
   fields: {
     name: { label: "Name", autoComplete: "name" },
     email: { label: "Work email", autoComplete: "email" },

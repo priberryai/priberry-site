@@ -1,6 +1,5 @@
 export const principles = {
-  label: "Principles",
-  title: "How we work, in four sentences.",
+  title: "Four things we will not compromise on.",
   items: [
     {
       name: "Isolated by design",

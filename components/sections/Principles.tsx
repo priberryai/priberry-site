@@ -1,43 +1,26 @@
 import { principles } from "@/content/principles";
 
+/*
+ * Principles on ink, as a statement list: large names, plain sentences,
+ * generous hairlines. No numbering, no boxes, no glow.
+ */
 export function Principles() {
   return (
-    <section id="principles" aria-labelledby="principles-title" className="on-ink section-y relative overflow-hidden bg-ink">
-      {/* Faint berry light from the top right */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-40 -top-40 size-[640px] rounded-full opacity-40"
-        style={{ background: "radial-gradient(circle, rgb(179 38 95 / 0.55), transparent 65%)" }}
-      />
-      <div className="container-page relative">
-        <p data-reveal className="label text-blush">
-          {principles.label}
-        </p>
-        <h2
-          id="principles-title"
-          data-reveal
-          style={{ "--i": 1 } as React.CSSProperties}
-          className="mt-5 max-w-3xl font-display text-display text-on-ink"
-        >
+    <section id="principles" aria-labelledby="principles-title" className="on-ink section-y bg-ink">
+      <div className="container-page">
+        <h2 id="principles-title" className="max-w-[18ch] font-display text-display text-on-ink">
           {principles.title}
         </h2>
-
-        <ol className="mt-14 grid overflow-hidden rounded-(--radius-card) ring-1 ring-inset ring-line-on-ink md:mt-20 md:grid-cols-2">
-          {principles.items.map((p, i) => (
-            <li
-              key={p.name}
-              data-reveal
-              style={{ "--i": i } as React.CSSProperties}
-              className="border-line-on-ink p-8 md:p-10 lg:p-12 [&:not(:first-child)]:border-t md:[&:nth-child(2)]:border-t-0 md:[&:nth-child(even)]:border-l"
-            >
-              <p aria-hidden="true" className="font-mono text-[0.8125rem] text-blush">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-8 font-display text-[2.25rem] leading-[1.05] text-on-ink">{p.name}</h3>
-              <p className="mt-4 max-w-md text-on-ink-muted">{p.body}</p>
-            </li>
+        <dl className="mt-14 border-t border-line-on-ink md:mt-20">
+          {principles.items.map((p) => (
+            <div key={p.name} className="grid gap-3 border-b border-line-on-ink py-9 md:py-11 lg:grid-cols-12 lg:items-baseline lg:gap-8">
+              <dt className="font-display text-[clamp(1.75rem,1.35rem+1.6vw,2.5rem)] font-semibold leading-[1.06] tracking-[-0.024em] text-on-ink lg:col-span-5">
+                {p.name}
+              </dt>
+              <dd className="max-w-xl text-lead text-on-ink-muted lg:col-span-6 lg:col-start-7">{p.body}</dd>
+            </div>
           ))}
-        </ol>
+        </dl>
       </div>
     </section>
   );

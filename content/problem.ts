@@ -2,10 +2,11 @@
 // the best of 9 frontier models "only manages to pass 16% of tasks", and
 // "bankers rate 0% of its outputs as client-ready" (abstract).
 export const problem = {
-  label: "The problem",
-  /** Two sentences; the second is set in italic berry. */
+  /** Two sentences; the second is set in the muted tone (Apple-style two-tone headline). */
   title: ["On general benchmarks, models look ready.", "On professional work, they are not."],
   stat: { value: 16, suffix: "%" },
+  /** Read by the 100-dot strip: one dot per task, the passing share lit. */
+  strip: { total: 100, lit: 16, label: "16 of every 100 tasks passed" },
   statCaption:
     "of tasks passed by the best of nine frontier models on BankerToolBench, a benchmark of end-to-end investment banking work. Bankers rated none of its outputs client-ready.",
   followUp:

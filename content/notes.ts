@@ -14,7 +14,7 @@ export type Note = {
 };
 
 export const notesSection = {
-  label: "Notes",
+  more: "More notes on rubric design and failure analysis are in progress.",
   title: "What we are learning, written down.",
   readMore: "Read the note",
 } as const;

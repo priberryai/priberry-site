@@ -1,48 +1,47 @@
-import { SectionHeader } from "@/components/SectionHeader";
 import { howItWorks } from "@/content/how-it-works";
-import { StepsProgress } from "./StepsProgress";
 
+/*
+ * The engagement as a journey: four stages side by side on one hairline that
+ * fills as the section scrolls into view (CSS scroll timeline, no JavaScript;
+ * browsers without it simply show the line full). No numbering: the order is
+ * the line itself.
+ */
 export function HowItWorks() {
   return (
-    <section id="how-it-works" aria-labelledby="how-title" className="section-y bg-lilac">
-      <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-8">
-        <div className="lg:col-span-5">
-          <div className="lg:sticky lg:top-32">
-            <SectionHeader id="how-title" label={howItWorks.label} title={howItWorks.title} intro={howItWorks.intro} />
-          </div>
+    <section id="how-it-works" aria-labelledby="how-title" className="section-y bg-paper-deep">
+      <div className="container-page">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
+          <h2 id="how-title" className="max-w-[18ch] font-display text-display text-ink lg:col-span-7">
+            {howItWorks.title}
+          </h2>
+          <p className="max-w-md text-lead text-body lg:col-span-4 lg:col-start-9">{howItWorks.intro}</p>
         </div>
 
-        <div className="lg:col-span-6 lg:col-start-7">
-          <StepsProgress>
-            {/* Rail: a quiet track with a berry fill scaled by --progress */}
-            <div aria-hidden="true" className="absolute bottom-6 left-[19px] top-6 w-px bg-line-strong">
-              <div className="steps-fill absolute inset-0 origin-top bg-berry" />
-            </div>
-            <ol className="relative space-y-6 md:space-y-8">
-              {howItWorks.steps.map((s, i) => (
-                <li key={s.name} data-step data-reveal className="step grid grid-cols-[40px_1fr] gap-3.5 sm:gap-5 md:gap-7">
-                  <span
-                    aria-hidden="true"
-                    className="step-dot relative z-10 grid size-10 place-items-center rounded-full bg-lilac font-mono text-[0.8125rem] ring-1 ring-inset ring-line-strong"
-                  >
-                    <span className="step-dot-fill absolute inset-0 rounded-full bg-berry" />
-                    <span className="relative">{String(i + 1).padStart(2, "0")}</span>
-                  </span>
-                  <div className="rounded-(--radius-card) bg-surface p-5 shadow-[0_1px_0_rgb(30_21_48/0.04)] ring-1 ring-line sm:p-6 md:p-8">
-                    <h3 className="font-display text-[2rem] leading-none text-ink">
-                      <span className="sr-only">Step {i + 1}: </span>
-                      {s.name}
-                    </h3>
-                    <p className="mt-4 text-body">{s.body}</p>
-                    <p className="mt-6 flex flex-col gap-1.5 border-t border-line pt-4 sm:flex-row sm:items-baseline sm:gap-3">
-                      <span className="label shrink-0 text-berry">Deliverable</span>
-                      <span className="text-[0.9375rem] font-medium text-ink">{s.deliverable}</span>
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </StepsProgress>
+        <div className="relative mt-16 md:mt-24">
+          {/* The rail (tablet and up) */}
+          <div aria-hidden="true" className="absolute left-0 right-0 top-[6px] hidden h-px bg-line-strong md:block">
+            <div className="journey-fill absolute inset-0 bg-berry" />
+          </div>
+          <ol className="grid gap-12 md:grid-cols-4 md:gap-8">
+            {howItWorks.steps.map((s, i) => (
+              <li key={s.name} className="relative md:pr-4">
+                <span
+                  aria-hidden="true"
+                  className={`relative block size-[13px] rounded-full ${
+                    i === howItWorks.steps.length - 1 ? "bg-berry" : "bg-paper-deep ring-2 ring-inset ring-berry"
+                  }`}
+                />
+                <h3 className="mt-6 font-display text-[1.75rem] leading-none tracking-[-0.022em] text-ink md:mt-8">
+                  {s.name}
+                </h3>
+                <p className="mt-4 text-body">{s.body}</p>
+                <p className="mt-6 border-t border-line-strong pt-4 text-[0.9375rem]">
+                  <span className="text-muted">{howItWorks.deliverableLabel} </span>
+                  <span className="font-medium text-ink">{s.deliverable}</span>
+                </p>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>

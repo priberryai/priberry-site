@@ -1,48 +1,41 @@
-import { SectionHeader } from "@/components/SectionHeader";
 import { displayTitle, formatDate, notes, notesSection, readingMinutes } from "@/content/notes";
 
+/* Notes as a journal index: date, title, summary. Grows as posts are added. */
 export function Notes() {
   return (
-    <section id="notes" aria-labelledby="notes-title" className="section-y border-t border-line">
-      <div className="container-page">
-        <SectionHeader id="notes-title" label={notesSection.label} title={notesSection.title} />
-        <ul className="mt-14 grid gap-6 md:mt-20 md:grid-cols-2">
-          {notes.map((n, i) => (
-            <li key={n.slug} data-reveal style={{ "--i": i } as React.CSSProperties}>
-              <a
-                href={`/notes/${n.slug}/`}
-                className="group flex h-full flex-col rounded-(--radius-card) bg-surface p-7 ring-1 ring-line transition-[transform,box-shadow] duration-500 ease-(--ease-brand) hover:-translate-y-1 hover:shadow-(--shadow-panel) md:p-9"
-              >
-                <p className="label text-muted">
-                  <time dateTime={n.date}>{formatDate(n.date)}</time> · {readingMinutes(n)} min read
-                </p>
-                <h3 className="mt-8 font-display text-[2rem] leading-[1.08] text-ink md:text-[2.375rem]">{displayTitle(n.title)}</h3>
-                <p className="mt-4 text-body">{n.summary}</p>
-                <p className="mt-auto flex items-center gap-2 pt-8 text-[0.9375rem] font-medium text-berry">
-                  <span className="link-underline">{notesSection.readMore}</span>
-                  <svg
+    <section id="notes" aria-labelledby="notes-title" className="section-y bg-paper-deep">
+      <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-8">
+        <h2 id="notes-title" className="max-w-[14ch] font-display text-display text-ink lg:col-span-4">
+          {notesSection.title}
+        </h2>
+        <div className="lg:col-span-7 lg:col-start-6">
+          <ul className="border-t border-line-strong">
+            {notes.map((n) => (
+              <li key={n.slug} className="border-b border-line-strong">
+                <a href={`/notes/${n.slug}/`} className="group grid grid-cols-[1fr_auto] items-start gap-6 py-8 md:py-10">
+                  <div>
+                    <p className="text-[0.9375rem] text-muted">
+                      <time dateTime={n.date}>{formatDate(n.date)}</time> · {readingMinutes(n)} min read
+                    </p>
+                    <h3 className="mt-3 font-display text-[clamp(1.75rem,1.35rem+1.6vw,2.5rem)] leading-[1.06] tracking-[-0.024em] text-ink transition-colors duration-300 group-hover:text-berry">
+                      {displayTitle(n.title)}
+                    </h3>
+                    <p className="mt-4 max-w-xl text-body">{n.summary}</p>
+                  </div>
+                  <span
                     aria-hidden="true"
-                    viewBox="0 0 16 16"
-                    className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5"
+                    className="mt-1 grid size-11 shrink-0 place-items-center rounded-full ring-1 ring-inset ring-line-strong transition-[background-color,color,transform] duration-300 ease-(--ease-brand) group-hover:translate-x-1 group-hover:bg-ink group-hover:text-paper"
                   >
-                    <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </p>
-              </a>
-            </li>
-          ))}
-          {/* Placeholder for the next note, clearly labelled */}
-          <li
-            data-reveal
-            style={{ "--i": notes.length } as React.CSSProperties}
-            className="flex min-h-56 flex-col justify-between rounded-(--radius-card) border border-dashed border-line-strong p-7 md:p-9"
-          >
-            <p className="label text-muted">Next note</p>
-            <p className="max-w-sm text-body">
-              More on rubric design and failure analysis is in progress. New notes will appear here.
-            </p>
-          </li>
-        </ul>
+                    <svg viewBox="0 0 16 16" className="size-4">
+                      <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-[0.9375rem] text-muted">{notesSection.more}</p>
+        </div>
       </div>
     </section>
   );

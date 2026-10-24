@@ -1,4 +1,5 @@
 import { footer, site } from "@/content/site";
+import { ButtonLink } from "./Button";
 import { Logo } from "./Logo";
 
 export function Footer() {
@@ -6,7 +7,17 @@ export function Footer() {
   return (
     <footer className="on-ink bg-ink text-on-ink-muted">
       <div className="container-page pb-10 pt-20 md:pt-28">
-        <div className="grid gap-14 lg:grid-cols-12">
+        {/* Closing statement */}
+        <div className="flex flex-col gap-8 border-b border-line-on-ink pb-16 md:flex-row md:items-end md:justify-between md:pb-20">
+          <p className="max-w-[16ch] font-display text-[clamp(2.25rem,1.6rem+2.8vw,4rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-on-ink">
+            {footer.statement}
+          </p>
+          <ButtonLink href={footer.cta.href} variant="on-ink" arrow>
+            {footer.cta.label}
+          </ButtonLink>
+        </div>
+
+        <div className="mt-16 grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <a href="/" aria-label="Priberry home" className="inline-block rounded-lg text-on-ink">
               <Logo className="h-8 w-auto" />

@@ -1,7 +1,8 @@
+// "How it works": the engagement, from first call to a measured result.
 export const howItWorks = {
-  label: "How it works",
-  title: "From first call to a measured result, in four steps.",
-  intro: "You see real work before you commit to anything, and every step ends with something you can use.",
+  title: "Start small. See the work before you pay for it.",
+  intro: "Four stages, each ending with something you can use, whether or not you go further.",
+  deliverableLabel: "You get",
   steps: [
     {
       name: "Scope",

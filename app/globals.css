@@ -143,51 +143,11 @@
   }
 }
 
-/* ---------- Section reveals (driven by components/RevealObserver.tsx) ---------- */
-.js [data-reveal] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity var(--duration-reveal) var(--ease-brand),
-    transform var(--duration-reveal) var(--ease-brand);
-  transition-delay: calc(var(--i, 0) * 80ms);
-}
-.js [data-reveal][data-shown] {
-  opacity: 1;
-  transform: none;
-}
-
-/* ---------- How it works: scroll-linked rail (components/sections/StepsProgress.tsx) ---------- */
-.steps-fill {
-  transform: scaleY(var(--progress, 1));
-  will-change: transform;
-}
-.step-dot {
-  color: var(--color-ink);
-  transition: color 400ms var(--ease-brand);
-}
-.step-dot-fill {
-  opacity: 0;
-  transform: scale(0.6);
-  transition:
-    opacity 400ms var(--ease-brand),
-    transform 500ms var(--ease-brand);
-}
-.step[data-lit] .step-dot {
-  color: #fff;
-}
-.step[data-lit] .step-dot-fill {
-  opacity: 1;
-  transform: scale(1);
-}
-/* Without JS the rail is full and every step is lit. */
-html:not(.js) .step-dot {
-  color: #fff;
-}
-html:not(.js) .step-dot-fill {
-  opacity: 1;
-  transform: none;
-}
+/* ---------- Reveal on first view ----------
+   components/RevealObserver.tsx sets data-shown on [data-reveal] elements the
+   first time they enter the viewport. Used only where the motion carries
+   meaning (the 16% dot strip). There is deliberately no generic fade-up:
+   most content simply sits on the page. */
 
 /* ---------- FAQ: answers fade in (opacity and transform only) ---------- */
 .faq[open] > p {
@@ -304,16 +264,21 @@ html:not(.js) .step-dot-fill {
     color 400ms var(--ease-brand),
     border-color 400ms var(--ease-brand);
 }
-html[data-nav-ink] .site-header .nav-bg {
+html[data-nav-ink] .site-header .nav-bg,
+html[data-nav-dark] .site-header .nav-bg {
   background-color: rgb(30 21 48 / 0.82);
   border-color: rgb(250 248 245 / 0.1);
 }
 html[data-nav-ink] .site-header nav > a,
+html[data-nav-dark] .site-header nav > a,
 html[data-nav-ink] .site-header nav ul a,
-html[data-nav-ink] .site-header button {
+html[data-nav-dark] .site-header nav ul a,
+html[data-nav-ink] .site-header button,
+html[data-nav-dark] .site-header button {
   color: var(--color-on-ink);
 }
-html[data-nav-ink] .site-header button {
+html[data-nav-ink] .site-header button,
+html[data-nav-dark] .site-header button {
   --tw-ring-color: rgb(250 248 245 / 0.28);
 }
 
@@ -380,6 +345,49 @@ html[data-nav-ink] .site-header button {
   }
   .story[data-mode="scroll"] .story-pane-a {
     padding-bottom: 1rem;
+  }
+}
+
+/* ---------- Problem: 100-dot strip, the passing 16 light in sequence ---------- */
+.dot-strip-dot {
+  position: relative;
+  box-shadow: inset 0 0 0 1.5px var(--color-line-strong);
+}
+.dot-strip-dot.is-on::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-berry);
+  transition:
+    opacity 400ms var(--ease-brand),
+    transform 550ms var(--ease-brand);
+  transition-delay: calc(var(--i) * 14ms);
+}
+.js .dot-strip:not([data-shown]) .dot-strip-dot.is-on::after {
+  opacity: 0;
+  transform: scale(0.4);
+}
+
+/* ---------- How it works: a rail that fills as it scrolls into view (CSS only) ---------- */
+.journey-fill {
+  transform-origin: left center;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .journey-fill {
+      animation: journey-fill linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 50%;
+    }
+  }
+}
+@keyframes journey-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 

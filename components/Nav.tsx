@@ -13,10 +13,26 @@ export function Nav() {
   const menuButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
+    // Also: turn the bar dark whenever an ink section (.on-ink) sits under it.
+    let raf = 0;
+    const check = () => {
+      raf = 0;
+      setScrolled(window.scrollY > 8);
+      const under = document.elementsFromPoint(window.innerWidth / 2, 36);
+      const dark = under.some((el) => !el.closest(".site-header") && el.closest("section.on-ink, footer.on-ink"));
+      document.documentElement.toggleAttribute("data-nav-dark", dark);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(check);
+    };
+    check();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   // Escape closes the menu and returns focus to its button.

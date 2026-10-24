@@ -90,7 +90,7 @@ export function GradeStory() {
       const ink = sub(p, RANGE.ink);
       el.style.setProperty("--ink", ink.toFixed(3));
       // Dark nav while the ink verdict sits under it (see globals.css).
-      const underNav = ink > 0.5 && r.top <= 0 && r.bottom > 72;
+      const underNav = ink > 0.5 && r.top <= 0 && r.bottom > 36; // ink under the nav's centre line
       document.documentElement.toggleAttribute("data-nav-ink", underNav);
       for (let i = 0; i < 4; i++) {
         el.style.setProperty(`--c${i}`, clamp01((p - BOUNDS[i]!) / (BOUNDS[i + 1]! - BOUNDS[i]!)).toFixed(3));

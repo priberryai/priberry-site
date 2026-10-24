@@ -1,7 +1,6 @@
 // FAQ answers describe how Priberry commits to working. Keep them true:
 // change an answer here if practice changes.
 export const faq = {
-  label: "FAQ",
   title: "Questions teams ask first.",
   items: [
     {

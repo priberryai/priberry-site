@@ -1,24 +1,28 @@
-import { SectionHeader } from "@/components/SectionHeader";
 import { who } from "@/content/who";
+import { keepHyphenated } from "@/lib/text";
 
+/*
+ * Who we work with, as one confident sentence rather than three boxes. The
+ * groups are set in ink; the connecting words recede.
+ */
 export function Who() {
   return (
-    <section aria-labelledby="who-title" className="section-y">
+    <section aria-labelledby="who-title" className="section-y bg-paper">
       <div className="container-page">
-        <SectionHeader id="who-title" label={who.label} title={who.title} />
-        <ul className="mt-14 grid border-t border-line-strong md:mt-20 md:grid-cols-3">
-          {who.groups.map((g, i) => (
-            <li
-              key={g.name}
-              data-reveal
-              style={{ "--i": i } as React.CSSProperties}
-              className="border-b border-line py-8 md:border-b-0 md:py-10 md:pr-10 md:[&:not(:first-child)]:border-l md:[&:not(:first-child)]:pl-10"
-            >
-              <h3 className="text-[1.25rem] font-semibold tracking-[-0.015em] text-ink">{g.name}</h3>
-              <p className="mt-3 text-body">{g.body}</p>
-            </li>
-          ))}
-        </ul>
+        <h2 id="who-title" className="sr-only">
+          {who.title}
+        </h2>
+        <p className="max-w-[26ch] font-display text-[clamp(2rem,1.3rem+2.9vw,3.75rem)] font-semibold leading-[1.1] tracking-[-0.026em] text-muted">
+          {who.sentence.map((part, i) =>
+            "strong" in part && part.strong ? (
+              <span key={i} className="text-ink">
+                {keepHyphenated(part.text)}
+              </span>
+            ) : (
+              <span key={i}>{keepHyphenated(part.text)}</span>
+            ),
+          )}
+        </p>
       </div>
     </section>
   );

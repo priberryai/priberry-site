@@ -24,6 +24,8 @@ export const nav = {
 } as const;
 
 export const footer = {
+  statement: "Expert judgement, made measurable.",
+  cta: { label: "Request a pilot", href: "/#pilot" },
   blurb:
     "Expert-graded evaluation sets and training data for teams building AI that does professional work.",
   groups: [

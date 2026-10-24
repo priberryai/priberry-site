@@ -4,9 +4,9 @@ import { useEffect } from "react";
 
 /**
  * One IntersectionObserver for the whole page. Any element with `data-reveal`
- * fades and rises into place the first time it enters the viewport (see
- * globals.css). Children can stagger with style={{ "--i": n }}.
- * Without JavaScript the `js` class is never set, so content is simply visible.
+ * gets `data-shown` the first time it enters the viewport; CSS decides what
+ * that means for that element (today: the 16% dot strip lights up).
+ * Without JavaScript the `js` class is never set, so content is in its final state.
  */
 export function RevealObserver() {
   useEffect(() => {

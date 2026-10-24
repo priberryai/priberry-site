@@ -12,6 +12,8 @@
   /* Colour */
   --color-ink: #1e1530;
   --color-paper: #faf8f5;
+  /* Alternating section tone, like Apple's white/grey rhythm. */
+  --color-paper-deep: #f2eee8;
   --color-surface: #ffffff;
   --color-berry: #b3265f;
   --color-berry-deep: #8a1b49;
