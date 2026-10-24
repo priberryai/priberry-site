@@ -1,0 +1,64 @@
+/*
+ * Priberry design tokens: the single source for colour, type, radius, motion.
+ * Tailwind v4 turns every token in @theme into a CSS variable and a utility
+ * (e.g. --color-berry -> bg-berry, text-berry).
+ *
+ * Contrast on paper (#FAF8F5), WCAG 2.x:
+ *   body  #443A57  ~9.9:1   muted #6B6178 ~5.5:1   berry #B3265F ~5.9:1
+ *   success #2F7D5B ~4.7:1  white on berry ~6.2:1   blush on plum ~8.4:1
+ *   blush on paper ~2:1 -> decorative only, never text.
+ */
+@theme {
+  /* Colour */
+  --color-ink: #1e1530;
+  --color-paper: #faf8f5;
+  --color-surface: #ffffff;
+  --color-berry: #b3265f;
+  --color-berry-deep: #8a1b49;
+  --color-blush: #f29ab9;
+  --color-purple: #5a2d82;
+  --color-lilac: #f4f0f9;
+  --color-success: #2f7d5b;
+  --color-body: #443a57;
+  --color-muted: #6b6178;
+  --color-line: rgb(30 21 48 / 0.1);
+  --color-line-strong: rgb(30 21 48 / 0.18);
+  /* On dark plum sections */
+  --color-on-ink: #faf8f5;
+  --color-on-ink-muted: #c9c1d6;
+  --color-line-on-ink: rgb(250 248 245 / 0.14);
+
+  /* Type families (variables are set by next/font in app/layout.tsx) */
+  --font-serif: var(--font-instrument-serif), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Type scale: fluid between 375px and 1440px viewports */
+  --text-hero: clamp(2.75rem, 1.65rem + 4.7vw, 6rem);
+  --text-hero--line-height: 0.98;
+  --text-hero--letter-spacing: -0.022em;
+  --text-display: clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.018em;
+  --text-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --text-lead--line-height: 1.55;
+  --text-body: clamp(1.0625rem, 1.03rem + 0.15vw, 1.125rem);
+  --text-body--line-height: 1.6;
+  --text-label: 0.78125rem;
+  --text-label--line-height: 1.3;
+  --text-label--letter-spacing: 0.12em;
+
+  /* Radius */
+  --radius-card: 24px;
+  --radius-panel: 28px;
+  --radius-inner: 16px;
+
+  /* Motion: one easing curve, used everywhere */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-reveal: 640ms;
+
+  /* Elevation */
+  --shadow-panel: 0 1px 0 rgb(30 21 48 / 0.04), 0 24px 60px -24px rgb(30 21 48 / 0.22),
+    0 8px 20px -12px rgb(30 21 48 / 0.12);
+  --shadow-lift: 0 14px 30px -14px rgb(138 27 73 / 0.55);
+}
