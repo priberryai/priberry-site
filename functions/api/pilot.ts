@@ -14,7 +14,8 @@
  * Environment (Pages project > Settings > Variables and secrets):
  *   TURNSTILE_SECRET_KEY  secret
  *   SUPABASE_URL          e.g. https://abcd1234.supabase.co
- *   SUPABASE_ANON_KEY     secret (public by design, but keep it server-side here)
+ *   SUPABASE_ANON_KEY     the project's publishable key (sb_publishable_...) or legacy
+ *                         anon key; public by design, but kept server-side here
  *   RATE_LIMIT            optional KV namespace binding
  */
 import { HONEYPOT_FIELD, TURNSTILE_FIELD, validatePilot } from "../../lib/pilot-schema";
@@ -112,15 +113,19 @@ export async function onRequestPost({ request, env }: Context): Promise<Response
 
   // 6. Store
   const d = result.data;
+  // New Supabase projects issue a publishable key (sb_publishable_...), sent only
+  // as `apikey`. Legacy anon keys are JWTs and also go in Authorization.
+  const key = env.SUPABASE_ANON_KEY;
+  const headers: Record<string, string> = {
+    apikey: key,
+    "Content-Type": "application/json",
+    // anon has no SELECT permission, so ask PostgREST not to return the row.
+    Prefer: "return=minimal",
+  };
+  if (key.startsWith("eyJ")) headers.Authorization = `Bearer ${key}`;
   const res = await fetch(`${env.SUPABASE_URL.replace(/\/$/, "")}/rest/v1/pilot_requests`, {
     method: "POST",
-    headers: {
-      apikey: env.SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      "Content-Type": "application/json",
-      // anon has no SELECT permission, so ask PostgREST not to return the row.
-      Prefer: "return=minimal",
-    },
+    headers,
     body: JSON.stringify({
       name: d.name,
       email: d.email,
