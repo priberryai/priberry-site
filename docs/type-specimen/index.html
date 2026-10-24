@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Priberry type specimen</title>
+<!-- Specimen only: loads candidates from Google Fonts. The site itself self-hosts the chosen face via next/font. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Host+Grotesk:wght@400;500;600;700&family=Funnel+Display:wght@400;500;600;700&family=Funnel+Sans:wght@400;500;600;700&family=Onest:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #1E1530; --paper: #FAF8F5; --berry: #B3265F; --body: #443A57; --muted: #6B6178; --line: rgb(30 21 48 / .12); }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font: 16px/1.5 system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  header { padding: 56px 0 24px; }
+  header h1 { font-size: 15px; font-weight: 600; }
+  header p { color: var(--muted); font-size: 14px; margin-top: 4px; max-width: 720px; }
+  .face { border-top: 1px solid var(--line); padding: 72px 0 88px; }
+  .tag { display: flex; gap: 12px; align-items: baseline; font-family: system-ui, sans-serif; font-size: 13px; color: var(--muted); margin-bottom: 40px; }
+  .tag b { color: var(--ink); font-weight: 600; font-size: 14px; }
+  .tag .letter { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: var(--paper); font-weight: 600; font-size: 12px; }
+  .hero { font-weight: 600; font-size: clamp(40px, 5.6vw, 72px); line-height: 1.04; letter-spacing: -0.022em; max-width: 15ch; }
+  .sub { font-weight: 500; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.32; letter-spacing: -0.008em; color: var(--body); margin-top: 22px; max-width: 34ch; }
+  .grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; margin-top: 56px; align-items: start; }
+  .body { font-size: 18px; line-height: 1.6; color: var(--body); }
+  .body + .body { margin-top: 14px; }
+  .h2 { font-weight: 600; font-size: 40px; line-height: 1.08; letter-spacing: -0.018em; margin-bottom: 18px; }
+  .nums { display: flex; gap: 28px; align-items: baseline; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+  .nums .big { font-weight: 600; font-size: 112px; line-height: .9; letter-spacing: -0.04em; color: var(--berry); }
+  .nums .mid { font-weight: 600; font-size: 44px; letter-spacing: -0.02em; }
+  .nums .mid small { font-size: 22px; color: var(--muted); font-weight: 500; }
+  .ui { display: flex; gap: 12px; align-items: center; margin-top: 28px; flex-wrap: wrap; }
+  .btn { height: 46px; padding: 0 22px; border-radius: 999px; border: 0; background: var(--berry); color: #fff; font: inherit; font-weight: 600; font-size: 15px; }
+  .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px rgb(30 21 48 / .2); }
+  .field { margin-top: 24px; }
+  .field label { display: block; font-weight: 500; font-size: 15px; }
+  .field .hint { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .field .input { height: 50px; border-radius: 14px; box-shadow: inset 0 0 0 1px rgb(30 21 48 / .18); background: #fff; margin-top: 10px; padding: 13px 16px; font-size: 16px; color: var(--ink); }
+  .rubric { margin-top: 26px; border-top: 1px solid var(--line); }
+  .rubric div { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .rubric span:last-child { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .rubric .pen span:last-child { color: var(--berry); }
+  .small { font-size: 13px; color: var(--muted); margin-top: 18px; }
+  .chars { font-size: 26px; letter-spacing: -0.01em; color: var(--body); margin-top: 36px; word-break: break-all; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Priberry type specimen</h1>
+    <p>Five free, open-licence grotesks, each set the way the redesign will use it: one family for everything, semibold headlines, sentence case, no mono labels. The current pairing is last, for comparison. Judge the headline, the numbers and the small text equally.</p>
+  </header>
+</div>
+
+<template id="tpl">
+  <section class="face">
+    <div class="wrap">
+      <div class="tag"><span class="letter"></span><b class="name"></b><span class="note"></span></div>
+      <h2 class="hero">AI breaks where professional work gets hard.</h2>
+      <p class="sub">We teach it how experts decide, with evaluation sets and training data written and graded by practising professionals.</p>
+      <div class="grid">
+        <div>
+          <h3 class="h2">On general benchmarks, models look ready.</h3>
+          <p class="body">The gap is rarely knowledge. It is judgement: the check an expert always runs, the shortcut they never take. That is what general data does not capture, and what we write down.</p>
+          <p class="body">A buyer offers $410M for our client’s business. Reported EBITDA is $38M, which includes a one-off $4M gain from an asset sale.</p>
+          <div class="ui"><button class="btn">Request a pilot</button><button class="btn ghost">See how it works</button></div>
+          <div class="field"><label>Field and workflow</label><div class="hint">For example: tax advisory, reviewing cross‑border structures</div><div class="input">Corporate finance, fairness opinions</div></div>
+        </div>
+        <div>
+          <div class="nums"><span class="big">16%</span><span class="mid">4 <small>/ 10</small></span></div>
+          <div class="rubric">
+            <div><span>States the implied multiple</span><span>+2</span></div>
+            <div><span>Strips the one-off gain: 12.1x on $34M</span><span>+3</span></div>
+            <div class="pen"><span>Shortcut: treats reported EBITDA as recurring</span><span>−3</span></div>
+          </div>
+          <p class="small">Illustrative example · Score 4 of 10 · Sendable as-is: No · Lau et al., arXiv:2604.11304, 2026.</p>
+        </div>
+      </div>
+      <p class="chars">Aa Bb Gg Rr Qq ff fi 0123456789 $ % & ( ) “ ” ‘ ’ → — –</p>
+    </div>
+  </section>
+</template>
+
+<div id="faces"></div>
+
+<script>
+  // Each candidate: display family, text family, short note.
+  const faces = [
+    ["A", "Schibsted Grotesk", "Schibsted Grotesk", "Schibsted Grotesk", "Newspaper grotesk from Schibsted Media; sturdy, editorial, slightly condensed numerals."],
+    ["B", "Hanken Grotesk", "Hanken Grotesk", "Hanken Grotesk", "Neutral neo-grotesk; closest in spirit to Helvetica-era Swiss type."],
+    ["C", "Host Grotesk", "Host Grotesk", "Host Grotesk", "Contemporary grotesk with open apertures; warm at large sizes."],
+    ["D", "Funnel (Display + Sans)", "Funnel Display", "Funnel Sans", "Two optical cuts of one family, like Apple’s SF Display and SF Text; most characterful headlines."],
+    ["E", "Onest", "Onest", "Onest", "Clean, geometric-leaning grotesk built for UI; very even texture."],
+    ["—", "Current: Instrument Serif + Geist", "Instrument Serif", "Geist", "The pairing the research flags as a common AI-site default. For comparison only."],
+  ];
+  const tpl = document.getElementById("tpl");
+  const host = document.getElementById("faces");
+  for (const [letter, name, display, text, note] of faces) {
+    const n = tpl.content.cloneNode(true);
+    n.querySelector(".letter").textContent = letter;
+    n.querySelector(".name").textContent = name;
+    n.querySelector(".note").textContent = note;
+    const sec = n.querySelector(".face");
+    sec.style.fontFamily = `"${text}", system-ui, sans-serif`;
+    for (const el of sec.querySelectorAll(".hero, .h2, .nums .big, .nums .mid")) {
+      el.style.fontFamily = `"${display}", system-ui, sans-serif`;
+      if (display === "Instrument Serif") { el.style.fontWeight = 400; }
+    }
+    host.appendChild(n);
+  }
+</script>
+</body>
+</html>
