@@ -3,7 +3,7 @@
 The public site for Priberry (operated by AURIST Private Limited, India): a static Next.js export served by Cloudflare Pages, with one Pages Function for the pilot request form.
 
 - **Stack:** Next.js 16 (App Router, `output: 'export'`), TypeScript strict, Tailwind CSS v4, Lenis (smooth scroll, loaded lazily), zod/mini (form rules, loaded on first use)
-- **Fonts:** Instrument Serif, Geist, Geist Mono via `next/font` (self-hosted at build time)
+- **Fonts:** Funnel Display and Funnel Sans via `next/font` (self-hosted at build time)
 - **Form:** Cloudflare Turnstile + Pages Function + Supabase (`pilot_requests`, insert-only RLS)
 - **Analytics:** Cloudflare Web Analytics (cookie-free, no consent banner)
 
@@ -20,8 +20,10 @@ In development the form uses Cloudflare's always-pass Turnstile test key. `next 
 
 ```bash
 npm run build
-npx wrangler pages dev out     # reads secrets from .dev.vars (copy .env.example)
+npm run preview    # wrangler pages dev; reads secrets from .dev.vars (copy .env.example)
 ```
+
+On Windows, `npm run preview` needs the current Microsoft Visual C++ Redistributable (x64), because the local Workers runtime loads `vcruntime140_1.dll`. Without it, wrangler stops with `write EOF`.
 
 ## Build
 
@@ -58,7 +60,7 @@ Design tokens (colour, type scale, radius, easing) are in `styles/tokens.css` on
 
 1. Create a project at supabase.com.
 2. Open **SQL Editor** and run `supabase/migrations/0001_pilot_requests.sql`. It creates `pilot_requests`, enables Row Level Security and lets the `anon` role **insert only** (no select, update or delete).
-3. From **Project Settings > API**, copy the **Project URL** and the **anon public** key.
+3. From **Project Settings > API Keys**, copy the **Project URL** and the **publishable** key (`sb_publishable_...`; older projects show an **anon public** key instead, which also works).
 4. Never put the `service_role` key anywhere in this project. The site does not need it.
 5. Read requests in the Supabase dashboard (Table Editor > `pilot_requests`). Update `status` to `contacted` or `closed` as you go.
 
@@ -68,6 +70,8 @@ Design tokens (colour, type scale, radius, easing) are in `styles/tokens.css` on
 2. Copy the **site key** into `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (build variable) and the **secret key** into `TURNSTILE_SECRET_KEY` (encrypted secret).
 
 ## Deploy to Cloudflare Pages
+
+The full launch order, including email for hello@priberry.com (the domain has no MX records yet), is in [docs/go-live.md](docs/go-live.md).
 
 1. Push this repo to GitHub (private is fine).
 2. Cloudflare dashboard > **Workers & Pages** > Create > Pages > Connect to Git, and pick the repo.
@@ -92,5 +96,5 @@ Design tokens (colour, type scale, radius, easing) are in `styles/tokens.css` on
 ## Quality checks
 
 - Lighthouse (mobile): `npx lighthouse https://priberry.com --preset=perf --form-factor=mobile` or Chrome DevTools > Lighthouse.
-- First-load JavaScript for the home page is about 147 KB gzipped (React and Next.js account for about 130 KB).
-- Everything respects `prefers-reduced-motion`. The grading panel has a Pause button.
+- Scripts referenced by the home page total about 185 KB gzipped (measured 26 Oct 2026; React and Next.js are most of it).
+- Everything respects `prefers-reduced-motion`: the hero field and the grade story fall back to static versions.

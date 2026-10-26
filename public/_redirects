@@ -1,0 +1,10 @@
+# Cloudflare Pages redirects. https://developers.cloudflare.com/pages/configuration/redirects/
+# Old WordPress URLs on priberry.com that have a real equivalent here.
+# The rest of the old site was template demo content and should return 404.
+/privacy-policy-2/     /privacy/      301
+/terms-of-services/    /terms/        301
+/contact-us/           /#pilot        301
+/book-an-appointment/  /#pilot        301
+/faqs/                 /#faq          301
+/about-us/             /              301
+/blog/                 /#notes        301

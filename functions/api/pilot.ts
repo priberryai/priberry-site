@@ -65,10 +65,15 @@ async function verifyTurnstile(secret: string, token: string, ip: string): Promi
   form.append("secret", secret);
   form.append("response", token);
   if (ip) form.append("remoteip", ip);
-  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form });
-  if (!res.ok) return false;
-  const data = (await res.json()) as { success?: boolean };
-  return data.success === true;
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form });
+    if (!res.ok) return false;
+    const data = (await res.json()) as { success?: boolean };
+    return data.success === true;
+  } catch (err) {
+    console.error("pilot: turnstile siteverify unreachable", err);
+    return false;
+  }
 }
 
 export async function onRequestPost({ request, env }: Context): Promise<Response> {
@@ -123,18 +128,24 @@ export async function onRequestPost({ request, env }: Context): Promise<Response
     Prefer: "return=minimal",
   };
   if (key.startsWith("eyJ")) headers.Authorization = `Bearer ${key}`;
-  const res = await fetch(`${env.SUPABASE_URL.replace(/\/$/, "")}/rest/v1/pilot_requests`, {
-    method: "POST",
-    headers,
-    body: JSON.stringify({
-      name: d.name,
-      email: d.email,
-      company: d.company,
-      field_workflow: d.field,
-      goal: d.goal,
-      link: d.link ? d.link : null,
-    }),
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${env.SUPABASE_URL.replace(/\/$/, "")}/rest/v1/pilot_requests`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        name: d.name,
+        email: d.email,
+        company: d.company,
+        field_workflow: d.field,
+        goal: d.goal,
+        link: d.link ? d.link : null,
+      }),
+    });
+  } catch (err) {
+    console.error("pilot: supabase unreachable", err);
+    return json(502, { ok: false, error: "store_failed" });
+  }
   if (!res.ok) {
     console.error("pilot: supabase insert failed", res.status, await res.text().catch(() => ""));
     return json(502, { ok: false, error: "store_failed" });
